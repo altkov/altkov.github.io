@@ -1,0 +1,68 @@
+<h1>Pagination Library</h1>
+
+<p>Pagination library used for output pagination on your page.</p>
+<p>Pagination is not the library that you call with controller and load with loader,
+    often it's simply called by class name.<br>
+    <code>new Pagination();</code>
+    <br>It creates several pagination links and also
+    prev link (&lt;), next link (&gt;), first page link (|&lt;), last page link (&gt;|)
+</p>
+
+<p>You can change properties to customize pagination and then call <code>render()</code> method.
+    <br>Default values below are sometimes overwritten.
+</p>
+
+<h2>Properties</h2>
+<dl>
+    <dt><i>public</i> int <code>total = 0</code></dt>
+    <dd>Total amount of elements (products, articles, etc), that were found</dd>
+
+    <dt><i>public</i> int <code>page = 1</code></dt>
+    <dd>Current page, that opened<br>
+        In default files current page this construction gets current page:
+        <pre><code>
+    if (isset($this->request->get['page'])) {
+        $page = $this->request->get['page'];
+    } else {
+        $page = 1;
+    }
+        </code></pre>
+        Since php7 you can simplify: <code>$page = $this->request->get['page'] ?? 1;</code>
+    </dd>
+
+    <dt><i>public</i> int <code>limit = 20</code></dt>
+    <dd>Limit of elements that will be shown on the page.</dd>
+
+    <dt><i>public</i> int <code>num_links = 8</code></dt>
+    <dd>Amount of pagination links, not including next and prev arrows</dd>
+
+    <dt><i>public</i> string <code>url = ''</code></dt>
+    <dd>Base url for pagination links, including page param (with placeholder <code>{page}</code> - can be urlencoded)</dd>
+
+    <dt><i>public</i> string <code>text_first = '|&amp;lt;'</code></dt>
+    <dd>Inner html of first page link (|&lt;)</dd>
+
+    <dt><i>public</i> string <code>text_last = '&amp;gt;|'</code></dt>
+    <dd>Inner html of last page link (&gt;|)</dd>
+
+    <dt><i>public</i> string <code>text_next = '&amp;gt;'</code></dt>
+    <dd>Inner html of next link (&gt;)</dd>
+
+    <dt><i>public</i> string <code>text_prev = '&amp;lt;'</code></dt>
+    <dd>Inner html of prev link (&lt;)</dd>
+</dl>
+
+<h2>Methods</h2>
+<dl>
+    <dt><i>public</i> <code>function render()</code> : string</dt>
+    <dd>Returns the actual html of pagination, or if there only one page returns empty string <code>''</code></dd>
+</dl>
+
+<h3>Example</h3>
+<pre><code>
+    $pagination = new Pagination();
+    $pagination->total = 67;
+    $pagination->page = 2;
+    $pagination->limit = 20;
+    $pagination->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&page={page}');
+</code></pre>

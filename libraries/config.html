@@ -1,0 +1,78 @@
+<h1>Config</h1>
+
+<p>
+    Config is a library with which you can access config values
+    (<b>Not the main site configs that stores file system constants! This configs is stored in DIR_CONFIG (/system/config/) usually</b>)
+    and also all settings from database.
+</p>
+<p>
+    <i>With this library you can't save your config values.</i>
+    If you want to change settings, update {prefix}setting db table.
+    If you want to change configs, edit files in DIR_CONFIG.
+</p>
+<p>You can access config library from controller or model with <code>$this->config</code></p>
+
+<p>This library has nothing to do with main site configs in /config.php and /admin/config.php<br>
+    You can access values from there easily by constants.
+    <code>HTTP_SERVER</code> or <code>DIR_APPLICATION</code> etc.
+</p>
+
+<h2>Properties</h2>
+<dl>
+    <dt><i>private</i> array <code>data = array()</code></dt>
+    <dd>All the config data</dd>
+</dl>
+
+<h2>Methods</h2>
+<dl>
+    <dt><i>public</i> <code>function get(<i>string</i> $key)</code> : mixed</dt>
+    <dd>Get value from <code>$data</code> by key and return it. If there's no entry with such key, returns <code>null</code>.</dd>
+
+    <dt><i>public</i> <code>function has(<i>string</i> $key)</code> : bool</dt>
+    <dd>
+        Basically, it's <code>isset</code> for config. Checks if entry with such key exists in <code>$data</code>
+        Returns <code>true</code> if entry exists, returns <code>if not exists</code>.
+    </dd>
+
+    <dt><i>public</i> <code>function set(<i>string</i> $key, <i>mixed</i> $value)</code></dt>
+    <dd>
+        Sets config <code>$data</code> entry <code>$key</code> to <code>$value</code>.<br>
+        Not saves changes in file system or db!<br>
+        If you want to change settings, update {prefix}setting db table.
+        If you want to change configs, edit files in DIR_CONFIG.
+    </dd>
+
+    <dt><i>public</i> <code>function load(<i>string</i> $filename)</code></dt>
+    <dd>
+        Load config file from DIR_CONFIG and save all entries to <code>$data</code> by merge old
+        data and new, replace old entries with new if they have same key.<br>
+
+        Put entries in config file into <i>array</i> <code>$_</code> variable.<br>
+        <h4>Example:</h4>
+        <pre><code>
+    $_['action_default']       = 'common/home';
+    $_['action_router']        = 'startup/router';
+    $_['action_error']         = 'error/not_found';
+    $_['action_pre_action']    = array();
+    $_['action_event']         = array();
+        </code></pre>
+        <br>
+
+        If file doesn't exist, triggers error and stops script execution.
+        <br><br>
+
+        Really, you shouldn't call this function unless you know you have to.
+        It's used in opencart core to load admin and catalog configs.
+        You can edit this config files or edit {prefix}setting db table.
+    </dd>
+</dl>
+
+<h2>Example</h2>
+<pre><code>
+    if ($this->config->has('some_value')) {
+        $value = $this->config->get('some_value');
+        call_some_func();
+    } else {
+        $value = 'default';
+    }
+</code></pre>

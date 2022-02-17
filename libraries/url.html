@@ -1,0 +1,58 @@
+<h1>URL Library</h1>
+
+<h2>Properties</h2>
+<dl>
+    <dt>private <i>string</i> <code>url</code></dt>
+    <dd>Contains the url base of your website defined in config with constant <code>HTTP_SERVER</code></dd>
+
+    <dt>private <i>string</i> <code>ssl</code></dt>
+    <dd>Contains the url base of your website defined in config with constant <code>HTTPS_SERVER</code>
+        <b>or HTTP_SERVER, if connection is not secure</b>
+    </dd>
+
+    <dt>private <i>array</i> <code>hooks = array()</code></dt>
+    <dd>Contains all hooks, that will be used for rewrite urls in <code>link()</code> function.
+        You can add hook with <code>addRewrite()</code> function. Hook is an object, that have
+        method <code>rewrite(string $url) : string</code> and returns processed url.
+    </dd>
+</dl>
+
+<h2>Methods</h2>
+<dl>
+    <dt><code><i>public</i> function link(<i>string</i> $route, <i>string</i> $args = '', <i>string</i> $connection = 'NOSSL') : <i>string</i></code></dt>
+    <dd>Gets the link from route. Params:
+        <ul>
+            <li>string $route - the route you need link</li>
+            <li>string $args - get params, divided by "<code>&</code>"
+                (you can also leave this params in route)
+                <br>Replaces "<code>&</code>" with "<code>&amp;amp;</code>", so not friends with javascript.
+            </li>
+            <li>string $connection
+                working cases are 'SSL' and 'NOSSL'
+                defines which base will be used (from properties above):
+                $url or $ssl. Always use SSL, no idea why default is <code>NOSSL</code>,
+                if connection is not secure it will return base from HTTP_SERVER config constant.
+            </li>
+        </ul>
+        Returns url link.
+        <br>
+        Example:
+        <code>
+            $url = $this->url->link('product/product', 'product_id=111', 'SSL');
+        </code>
+        <hr>
+    </dd>
+
+    <dt><code><i>public</i> function addRewrite(object $hook)</code></dt>
+    <dd>Adds rewrite hook to hooks list, used in function <code>rewrite()</code>, this hooks work only for
+        linking in <code>link()</code> function.<br>
+        Hook is an object that should have <code>rewrite(string $url) : string</code> method, that process
+        url and returns processed url.
+        <hr>
+    </dd>
+
+    <dt><code><i>public</i> function rewrite(string $url) : <i>string</i></code></dt>
+    <dd>Applies all hooks from hooks list (uses function <code>rewrite(string $url) : string</code>) from hook.
+    <br>Returns processed url.
+    </dd>
+</dl>

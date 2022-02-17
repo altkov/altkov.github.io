@@ -1,0 +1,36 @@
+<h1>Request Library</h1>
+
+<p>Request library contains your request data.</p>
+<p>Basically, it's just copies all the request parameters (like $_POST, $_GET) to the properties.</p>
+<p>The only and main benefit from it is that library escapes all the values with <code>clean($data)</code> method, so it's safe to inject this values in html (like e-mail messages, or search params).
+    <br>But not the database! Use <code>escape</code> method of your database engine before put something in database.
+    <br>Also you should use double quotes and not the single quotes in your html attributes if you put there data from request library. That's because used htmlspecialchars escape method ENT_COMPAT not escapes single quotes.
+</p>
+<p>That's why you should always use request properties and not superglobals to access request data.</p>
+<br>
+<p>You can call this library in controller with <code>$this->request</code></p>
+
+<h2>Properties</h2>
+<dl>
+    <dt><i>public</i> array <code>get = array()</code></dt>
+    <dd>Contains cleaned $_GET data</dd>
+
+    <dt><i>public</i> array <code>post = array()</code></dt>
+    <dd>Contains cleaned $_POST data</dd>
+
+    <dt><i>public</i> array <code>cookie = array()</code></dt>
+    <dd>Contains cleaned $_COOKIE data</dd>
+
+    <dt><i>public</i> array <code>files = array()</code></dt>
+    <dd>Contains cleaned $_FILES data</dd>
+
+    <dt><i>public</i> array <code>server = array()</code></dt>
+    <dd>Contains cleaned $_SERVER data</dd>
+</dl>
+
+<h2>Methods</h2>
+<dl>
+    <dt><i>public</i> <code>function clean(<i>mixed</i> $data) : <i>mixed</i></code></dt>
+    <dd>Returns escaped with <code>htmlspecialchars($data, ENT_COMPAT, 'UTF-8')</code> data
+        <br>If data is array, recursively escapes all the contained values (in child arrays too).</dd>
+</dl>

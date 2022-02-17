@@ -1,0 +1,47 @@
+<h1>Language</h1>
+
+<h2>Files</h2>
+<h3>Storage</h3>
+<ul>
+    <li>
+        <h4>Catalog</h4>
+        <p>Catalog language files stored at <code>/catalog/language/<i>your-language</i></code></p>
+    </li>
+    <li>
+        <h4>Admin</h4>
+        <p>Admin language files stored at <code>/admin/language/<i>your-language</i></code></p>
+    </li>
+</ul>
+
+<h3>How file looks like</h3>
+<p>Write your entries to variable <i>array</i> <code>$_</code>. </p>
+<code>
+    $_['entry_enabled'] = 'Enabled';<br>
+    $_['entry_name']    = 'Name';
+</code>
+
+
+<h2>Library</h2>
+<p>
+    Library language can be called from controller with <code>$this->language</code>.
+</p>
+<h3>Language library methods:</h3>
+<dl>
+    <dt><code><i>public</i> function get(<i>string</i> $key) : <i>string</i></code></dt>
+    <dd>Gets entry from language files by.<br>
+    Returns entry from language datas or, if can't find - returns $key (the one from params)
+    </dd>
+
+    <dt><code><i>public</i> function load(string $filename) : <i>array</i></code></dt>
+    <dd>
+        Load language file with entries by filename.
+        First seeks file in your language directory (russian, italian, finnish).
+        If can't find it in there, tries to load file from english directory.
+        <br>
+        Returns all language data.
+    </dd>
+    <dd>
+        If you load multiple language files in controller, language data merges
+        (entries from last loaded files overwrites entries with same keys from early loaded files)
+    </dd>
+</dl>
