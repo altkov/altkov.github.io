@@ -1,0 +1,35 @@
+<h1>Helpers</h1>
+<p>Helpers is independent functions that you can use in any part of your code.</p>
+<p>Helpers stored in <code>DIR_SYSTEM</code> helper directory (/system/helper by default)</p>
+<p>You can load helper file in model or controller with <code>load</code> object, use <code>helper</code> method<br>
+    or you can include it yourself in /system/startup.php file.
+</p>
+
+<h2>Default helpers</h2>
+<div>
+    <h4><code>function token(<i>int</i> $length = 32)</code> : <i>string</i></h4>
+    <p>Create random token with defined length. Not cryptographically safe, uses <code>mt_rand</code> function.</p>
+</div>
+
+<h3>UTF-8 helpers</h3>
+<p>A bunch of functions to process string with utf-8 text.</p>
+<p>
+    Basically, this function are wrappers for mbstring functions, but if mbstring extension is not loaded, it will try use iconv extension functions instead.
+    <br>They are used in opencart default files often.
+</p>
+
+<dl>
+    <dt><code>function utf8_strlen(<i>string</i> $string) : <i>int</i></code></dt>
+    <dd><b>If iconv</b>: can return <code>false</code> if there's encoding error></dd>
+
+    <dt><code>function utf8_strpos(<i>string</i> $string, <i>int</i> $needle, <i>int</i> $offset) : <i>false|int</i></code></dt>
+    <dt><code>function utf8_strrpos(<i>string</i> $string, <i>int</i> $needle, <i>int</i> $offset) : <i>false|int</i></code></dt>
+    <dt><code>function utf8_substr(<i>string</i> $string, <i>int</i> $offset, <i>int</i> $length) : <i>string</i></code></dt>
+    <dd><b>If iconv</b>: returns <code>false</code> if <code>$offset</code> is greater than <code>$string</code> length</dd>
+
+    <dt><code>function utf8_strtoupper(<i>string</i> $string) : <i>string</i></code></dt>
+    <dd><b>If iconv</b>: returns <code>false</code> if string is empty</dd>
+
+    <dt><code>function utf8_strtolower(<i>string</i> $string) : <i>string</i></code></dt>
+    <dd><b>If iconv</b>: returns <code>false</code> if string is empty</dd>
+</dl>

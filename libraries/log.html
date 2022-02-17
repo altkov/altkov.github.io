@@ -1,0 +1,25 @@
+<h1>Log Library</h1>
+<p>Log library helps you write logs.</p>
+<p>
+    Log is not loaded with <code>load</code> object library.<br>
+    You create <code>Log</code> instance yourself.<br>
+    <code>new Log('my-log.log')</code>
+</p>
+
+<h2>Properties</h2>
+<dl>
+    <dt><i>private</i> resource|false <code>$handle</code></dt>
+    <dd>Log file handle.</dd>
+</dl>
+
+<h2>Methods</h2>
+<dl>
+    <dt><i>public</i> <code>function __construct(<i>string</i> $filename)</code></dt>
+    <dd>Opens a file handle by <code>$filename</code> in <code>DIR_LOGS</code> (/system/logs by default)</dd>
+
+    <dt><i>public</i> <code>function write(<i>string</i> $message)</code></dt>
+    <dd>Write message to the file on new line including time</dd>
+
+    <dt><i>public</i> <code>function __destruct()</code></dt>
+    <dd>Closes file handle</dd>
+</dl>
