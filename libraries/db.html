@@ -1,2 +1,89 @@
 <h1>DB Library</h1>
 <p>DB Library is a wrapper for database functions.</p>
+<p>DB is registry-stored library. You should use library only in model and in there you can call DB by <code>$this->db</code></p>
+
+<h3>You should know</h3>
+<p>DB prefix is stored in constant <code>DB_PREFIX</code>, defined in main site config.</p>
+
+<h2>Properties</h2>
+<dl>
+    <dt><i>private object</i> <code>$adaptor</code></dt>
+    <dd>Adaptor for your DBMS (mysql, postgresql etc)<br>
+        You can change type of adaptor in main site config.
+    </dd>
+</dl>
+
+<h2>Methods</h2>
+<dl>
+    <dt><i>public</i> function <code>query(<i>string</i> $sql, <i>array</i> $params = array())</code> : <i>stdClass|true</i></dt>
+    <dd>
+        Execute query.
+        Params:
+        <dl>
+            <dt><i>string</i> <code>$sql</code></dt>
+            <dd>Query code itself</dd>
+
+            <dt><i>array</i> <code>$params = array()</code></dt>
+            <dd>Array of params, used for PDO placeholders. Ignored if any other adaptor.<br>
+                For other adaptors, use <code>escape</code> method and inject params to <code>$sql</code> param.
+            </dd>
+        </dl>
+        Can return:
+        <ul>
+            <li>Object of results for queries which produce result set (<code>SELECT</code>, <code>SHOW</code> etc).
+                <br> Object has 3 properties.
+                <dl>
+                    <dt><i>public array</i> <code>$row = array()</code></dt>
+                    <dd>First row of result set as array</dd>
+
+                    <dt><i>public array</i> <code>$rows = array()</code></dt>
+                    <dd>Multidimensional array of all result rows</dd>
+
+                    <dt><i>public int</i> <code>$num_rows = 0</code></dt>
+                    <dd>Number of result rows</dd>
+                </dl>
+                This 3 properties will always be in object and have specified types if object is returned.
+            </li>
+            <li>True for other queries</li>
+        </ul>
+
+        Example: <br>
+        <pre><code>
+    $query = $this->db->query("SELECT customer_id, firstname, lastname, email FROM `" . DB_PREFIX . "customer` WHERE code = '" . $this->db->escape($code) . "' AND code != ''");
+
+    return $query->row;
+        </code></pre>
+        If you are using PDO adaptor, you can also write:
+        <pre><code>
+    $query = $this->db->query("SELECT customer_id, firstname, lastname, email FROM `" . DB_PREFIX . "customer` WHERE code = ? AND code != ''", [$code]);
+
+    return $query->row;
+        </code></pre>
+    </dd>
+
+    <dt><i>public</i> function <code>escape(<i>string</i> $value)</code></dt>
+    <dd>
+        Escapes string with escape adaptor function. You should use it before push data to database. <br>
+        Is really unsafe for PDO, use placeholders and <code>$params</code> param of method <code>query</code>. If you are changing adaptor to PDO, you should replace all <code>escape</code> calls with placeholders. <br>
+        Use this only on strings, on integers use <code>(int)</code> or <code>intval</code> function.
+        For booleans, you can also use <code>(int)</code> or <code>intval</code>.
+        <code>(float)</code> for floats.
+    </dd>
+
+    <dt><i>public</i> function <code>countAffected()</code> : <i>int</i></dt>
+    <dd>
+        Returns total amount of affected rows.
+    </dd>
+
+    <dt><i>public</i> function <code>getLastId()</code> : <i>int|string</i></dt>
+    <dd>
+        Returns last insert id.
+    </dd>
+
+    <dt><i>public</i> function <code>connected()</code> (<code>isConnected()</code>) : <i>bool</i></dt>
+    <dd>
+        <strong>Added in 2.2.0</strong><br>
+        <b>Broken before 3.0.0!</b> Before 3.0.0, tries to call <code>connected</code> adaptor method, but method's name is <code>isConnected</code> <br>
+        Can be renamed to isConnected after 3.0.3.8
+    </dd>
+</dl>

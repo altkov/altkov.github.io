@@ -1,0 +1,71 @@
+<h1>Customer</h1>
+
+<p>Customer is library for handling customers' accounts.</p>
+<p>It's registry-stored library, call it by <code>$this->customer</code></p>
+
+<h2>Methods</h2>
+<p>If customer is not logged, each part of customer data will be <code>null</code> or <code>''</code></p>
+
+<p>Sometimes properties may be mixed up, (telephone field can be empty, and last name field can store telephone etc) so check your database and account code before using certain getters.</p>
+
+<dl>
+    <dt><i>public</i> function <code>login(<i>string</i> $email, <i>string</i> $password, <i>bool</i> $override = false)</code> : <i>bool</i></dt>
+    <dd>
+        Login customer by email and password. <br>
+        Params:
+        <dl>
+            <dt><i>string</i> <code>$email</code></dt>
+            <dd>Customer's email. Case is ignored</dd>
+
+            <dt><i>string</i> <code>$password</code></dt>
+            <dd>Customer's password (ignored if <code>$override</code> is true)</dd>
+
+            <dt><i>string</i> <code>$override</code></dt>
+            <dd>
+                Used in login override for admin, if he tries to log in customer's account from admin panel.<br>
+                If true, <code>$password</code> param is ignored.<br>
+                <b>Don't use override before you check user's permission!</b>
+            </dd>
+        </dl>
+        Returns true if login is successful and false if user doesn't exist
+    </dd>
+
+    <dt><i>public</i> function <code>logout()</code></dt>
+    <dd>Deletes session id for customer, sets all properties to empty string</dd>
+
+    <dt><i>public</i> function <code>isLogged()</code> : <i>int|null|string</i></dt>
+    <dd>Returns customer's id. And I making no mistake, returning value is not boolean.</dd>
+
+    <dt><i>public</i> function <code>getId()</code> : <i>int|null|string</i></dt>
+    <dd>Returns customer's id</dd>
+
+    <dt><i>public</i> function <code>getFirstName()</code> : <i>string|null</i></dt>
+    <dd>Returns customer's first name (usually it's login)</dd>
+
+    <dt><i>public</i> function <code>getLastName()</code> : <i>string|null</i></dt>
+    <dd>Returns customer's last name</dd>
+
+    <dt><i>public</i> function <code>getGroupId()</code> : <i>int|null|string</i></dt>
+    <dd>Return customer group id</dd>
+
+    <dt><i>public</i> function <code>getEmail()</code> : <i>string|null</i></dt>
+    <dd>Returns customer's email</dd>
+
+    <dt><i>public</i> function <code>getTelephone()</code> : <i>string|null</i></dt>
+    <dd>Returns customer's telephone</dd>
+
+    <dt><i>public</i> function <code>getFax()</code> : <i>string|null</i></dt>
+    <dd>Returns customer's fax</dd>
+
+    <dt><i>public</i> function <code>getNewsletter()</code> : <i>int|null|string</i></dt>
+    <dd>Returns customer's newsletter agreement: 1 for subscribed, 0 for not subscribed</dd>
+
+    <dt><i>public</i> function <code>getAddressId()</code> : <i>int|null|string</i></dt>
+    <dd>Returns customer's address id. You can get address details with method <code>getAddress</code> of <code>ModelAccountAddress</code></dd>
+
+    <dt><i>public</i> function <code>getBalance()</code> : <i>int|null</i></dt>
+    <dd>Returns customer's balance. <code>null</code> if no transactions were made by this customer</dd>
+
+    <dt><i>public</i> function <code>getRewardPoints()</code> : <i>int|null</i></dt>
+    <dd>Returns customer's reward points. <code>null</code> if no rewards were granted to customer</dd>
+</dl>
