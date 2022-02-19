@@ -1,0 +1,55 @@
+<h1>Document Library</h1>
+<p>Document library is used to take care of <code>&lt;head&gt;</code> of your page.</p>
+<p>
+    Basically, by using methods of this library, you pass params to header controller (or you pass scripts to footer).
+</p>
+<p>It's registry-stored library, call it by <code>$this->document</code></p>
+
+<h2>Methods</h2>
+<dl>
+    <dt><i>public</i> function <code>setTitle(<i>string</i> $title)</code></dt>
+    <dd>Sets document <code>&lt;title&gt;</code></dd>
+
+    <dt><i>public</i> function <code>setDescription(<i>string</i> $description)</code></dt>
+    <dd>Sets document description (meta description)</dd>
+
+    <dt><i>public</i> function <code>setKeywords(<i>string</i> $keywords)</code></dt>
+    <dd>Sets document keywords (meta keywords)</dd>
+
+    <dt><i>public</i> function <code>addLink(<i>string</i> $href, <i>string</i> $rel)</code></dt>
+    <dd>Adds new <code>&lt;link&gt;</code> to the <code>&lt;head&gt;</code></dd>
+
+    <dt><i>public</i> function <code>addStyle(<i>string</i> $href, <i>string</i> $rel = 'stylesheet', <i>string</i> $media = 'screen')</code></dt>
+    <dd>Adds new style to the <code>&lt;head&gt;</code> </dd>
+
+    <dt><i>public</i> function <code>addScript(<i>string</i> $href, <i>string</i> $postion = 'header')</code></dt>
+    <dd>Adds script to header or footer. Use <code>$position</code> 'footer' to pass script into footer.
+        You can pass custom position, and then get all the scripts by method <code>getScripts('my-position')</code>, but what's the point?
+    </dd>
+
+    <dt><i>public</i> function <code>setOgImage(<i>string</i> $image)</code></dt>
+    <dd>Sets meta open graph image</dd>
+
+    <dt><br>Methods below are used in header and footer controllers<br></dt>
+
+    <dt><i>public</i> function <code>getTitle()</code> : <i>string|null</i></dt>
+    <dd>Returns document title</dd>
+
+    <dt><i>public</i> function <code>getDescription()</code> : <i>string|null</i></dt>
+    <dd>Returns document description</dd>
+
+    <dt><i>public</i> function <code>getKeywords()</code> : <i>string|null</i></dt>
+    <dd>Returns document keywords</dd>
+
+    <dt><i>public</i> function <code>getLinks()</code> : <i>array</i></dt>
+    <dd>Return links, that were set with <code>addLink</code> method</dd>
+
+    <dt><i>public</i> function <code>getStyles()</code> : <i>array</i></dt>
+    <dd>Returns styles, that were set with <code>addStyle</code> method</dd>
+
+    <dt><i>public</i> function <code>getScripts(string $postion = 'header')</code> : <i>array</i></dt>
+    <dd>Returns scripts, added with <code>addScript</code> with given <code>$position</code></dd>
+
+    <dt><i>public</i> function <code>getOgImage()</code> : <i>string|null</i></dt>
+    <dd>Return open graph image</dd>
+</dl>

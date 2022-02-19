@@ -8,7 +8,7 @@
 <h2>Default helpers</h2>
 <div>
     <h4><code>function token(<i>int</i> $length = 32)</code> : <i>string</i></h4>
-    <p>Create random token with defined length. Not cryptographically safe, uses <code>mt_rand</code> function.</p>
+    <p>Create random token with defined length. Not cryptographically safe, it uses <code>mt_rand</code> function.</p>
 </div>
 
 <h3>UTF-8 helpers</h3>
@@ -20,7 +20,7 @@
 
 <dl>
     <dt><code>function utf8_strlen(<i>string</i> $string) : <i>int</i></code></dt>
-    <dd><b>If iconv</b>: can return <code>false</code> if there's encoding error></dd>
+    <dd><b>If iconv</b>: can return <code>false</code> if there's encoding error</dd>
 
     <dt><code>function utf8_strpos(<i>string</i> $string, <i>int</i> $needle, <i>int</i> $offset) : <i>false|int</i></code></dt>
     <dt><code>function utf8_strrpos(<i>string</i> $string, <i>int</i> $needle, <i>int</i> $offset) : <i>false|int</i></code></dt>

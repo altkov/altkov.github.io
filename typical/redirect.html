@@ -1,0 +1,17 @@
+<h1>Redirect</h1>
+
+<p>There's <code>redirect</code> method in <a href="../libraries/response.html">Response</a> library.</p>
+<p>In controller (and you should use redirect only in controller) you can call it by <code>$this->response->redirect</code></p>
+
+<dl>
+    <dt><i>public</i> function <code>redirect(<i>string</i> $url, <i>int</i> $status = 302)</code></dt>
+    <dd>Redirect user to <code>$url</code> with passed <code>$status</code> code and stop script execution.
+    </dd>
+</dl>
+
+<p>Example:</p>
+<pre><code>
+    if (!$logged) {
+        $this->response->redirect(HTTPS_SERVER);
+    }
+</code></pre>

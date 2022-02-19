@@ -1,0 +1,18 @@
+<h1>Encryption Library</h1>
+<p>With encryption library, you can encrypt and decrypt data.</p>
+<p>Encryption is registry-stored library, call it by <code>$this->encryption</code></p>
+
+<h2>Methods</h2>
+<dl>
+    <dt><i>public</i> function <code>encrypt(<i>string</i> $value)</code> : <i>string</i></dt>
+    <dd>Encrypt data</dd>
+
+    <dt><i>public</i> function <code>decrypt(<i>string</i> $value)</code> : <i>string</i></dt>
+    <dd>Decrypt data</dd>
+</dl>
+
+<h2>Properties</h2>
+<dl>
+    <dt><i>private</i> <code>$key</code></dt>
+    <dd>Encryption passphrase. Configures in admin, setting <code>config_encryption</code>. Warning! If you change your passphrase, you will lost all encrypted data. So decrypt data and save it before changing passphrase.</dd>
+</dl>

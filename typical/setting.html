@@ -1,0 +1,19 @@
+<h1>Get setting value</h1>
+
+<p>To get setting value in controller or model, use method <code>get</code> of <a href="../libraries/config.html">Config</a> library</p>
+<p>It's not doing any database requests, all settings gathered on startup in core files.</p>
+
+<p>To get your settings call <code>$this->config->get(<i>string</i> $key)</code></p>
+
+<dl>
+    <dt><i>public</i> <code>function get(<i>string</i> $key)</code> : mixed</dt>
+    <dd>Get value from settings or config by key and return it. If there's no entry with such key, returns <code>null</code>.</dd>
+</dl>
+
+<p>Example:</p><pre><code>
+    $shop_name = $this->config->get('config_name');
+</code></pre>
+
+<p>If you want to get setting from admin panel and have no idea with what key it's labelled, find <code>name</code> attribute of form element. Usually, it's the key.</p>
+<hr>
+<p>If you want to get all settings in the group use method <code>getSetting</code> of <code>ModelSettingSetting</code></p>

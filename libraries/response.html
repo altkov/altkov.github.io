@@ -1,0 +1,35 @@
+<h1>Response Library</h1>
+<p>Response library used to take handle of response to user</p>
+<p>Response is registry-stored library. In controller (and you must use it only in controller) you can call it by <code>$this->response</code></p>
+
+<h2>Methods</h2>
+<dl>
+    <dt><i>public</i> function <code>addHeader(<i>string</i> $header)</code></dt>
+    <dd>Adds header to queue (it's not added immediately!). Method <code>output</code> enqueues all the headers. It's called in opencart core,
+        in <code>DIR_SYSTEM</code> framework.php (system/framework.php by default).
+    </dd>
+
+    <dt><i>public</i> function <code>redirect(<i>string</i> $url, <i>int</i> $status = 302)</code></dt>
+    <dd>Redirect user to <code>$url</code> with passed <code>$status</code> code and stop script execution.
+        <br>Unlike of <code>addHeader</code>, redirects immediately.
+    </dd>
+
+
+    <dt><i>public</i> function <code>setOutput(<i>string</i> $output)</code></dt>
+    <dd>Sets given string as response output. If called again, output changes.</dd>
+
+    <dt><i>public</i> function <code>getOutput()</code> : <i>string|null</i></dt>
+    <dd>Returns output, that was set in <code>setOutput</code> method</dd>
+
+    <dt><i>public</i> function <code>output()</code></dt>
+    <dd>Sends all the output to browser. Called in core file <code>DIR_SYSTEM</code> framework.php (/system/framework.php),
+        so you don't have to call it.
+    </dd>
+
+    <dt><i>public</i> function <code>setCompression(<i>int</i> $level = 0)</code></dt>
+    <dd>
+        Function used in core, you don't have to call it. <br>
+        Sets level of compression to response. <br>
+        Compression level stored in <code>config_compression</code> setting. You can change it from admin panel.
+    </dd>
+</dl>
